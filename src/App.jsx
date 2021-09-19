@@ -1,12 +1,11 @@
-import React from 'react';
-import './App.css';
-import TodoHome from './components/TodoHome';
+import React from "react";
+import "./App.css";
+import TodoContext from "./context/TodoContext";
 
 function App() {
-
   return (
     <div>
-      <TodoHome/>
+      <TodoContext />
     </div>
   );
 }

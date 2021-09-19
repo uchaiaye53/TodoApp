@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Todolist } from "../context/TodoContext";
 
-function TodoBoard({ todo, setTodo, idx, todos, setTodos, setEditMode }) {
+function TodoBoard({ todo, setTodo, idx, setEditMode }) {
+  const [todos, setTodos] = useContext(Todolist);
 
-    const editDelete = (currentValue,id) =>{
-        if(idx===id){
-            return false;
-        }
-        else{
-            return true;
-        }
-     }
+  const editDelete = (currentValue, id) => {
+    if (idx === id) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   const edit = (e) => {
     e.preventDefault();
     setTodo(todos[idx]);
     const newTodos = [...todos];
-    const newTodos2= newTodos.filter(editDelete);
+    const newTodos2 = newTodos.filter(editDelete);
     setTodos(newTodos2);
     setEditMode(true);
-
   };
-
 
   const delet = (e) => {
     e.preventDefault();

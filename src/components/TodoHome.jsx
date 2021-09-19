@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import TodoBoard from "./TodoBoard";
+import { Todolist } from "../context/TodoContext";
 
 function TodoHome() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useContext(Todolist);
+
   const [editMOde, setEditMode] = useState(false);
   const demo = () => {
     return {
@@ -56,7 +58,6 @@ function TodoHome() {
           </div>
           <div className="task">
             <p className="lebel">
-                {" "}
               <label htmlFor="new-task">Todo:</label>
             </p>
             <textarea
@@ -71,9 +72,7 @@ function TodoHome() {
 
           <div>
             <button className="button" type="submit">
-              {
-                  editMOde?"Save Edit":"Create"
-              }
+              {editMOde ? "Save Edit" : "Create"}
             </button>{" "}
           </div>
         </form>
@@ -84,10 +83,8 @@ function TodoHome() {
           <TodoBoard
             key={idx}
             idx={idx}
-            todos={todos}
             todo={todo}
             setTodo={settodo}
-            setTodos={setTodos}
             setEditMode={setEditMode}
           />
         ))}
