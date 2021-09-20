@@ -1,42 +1,37 @@
 import React, { useContext } from "react";
 import { Todolist } from "../context/TodoContext";
 
-function TodoBoard({ todo, setTodo, idx, setEditMode }) {
-  const [todos, setTodos] = useContext(Todolist);
-
-  const editDelete = (currentValue, id) => {
-    if (idx === id) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+function TodoBoard({
+  formTodo: { name, email, description },
+  setFormTodo,
+  idx,
+  setEditMode,
+}) {
+  const [allTodos, setAllTodos] = useContext(Todolist);
 
   const edit = (e) => {
     e.preventDefault();
-    setTodo(todos[idx]);
-    const newTodos = [...todos];
-    const newTodos2 = newTodos.filter(editDelete);
-    setTodos(newTodos2);
     setEditMode(true);
+    setFormTodo(allTodos[idx]);
+    const newTodos = [...allTodos];
+    setAllTodos(newTodos.filter((currentValue, id) => idx !== id));
   };
 
   const delet = (e) => {
     e.preventDefault();
-    const newTodos = [...todos];
-    const newTodos2 = newTodos.filter(editDelete);
-    setTodos(newTodos2);
+    const newTodos = [...allTodos];
+    setAllTodos(newTodos.filter((currentValue, id) => idx !== id));
   };
 
   return (
     <div className="App2">
       <div className="container2">
-        <h1 id="header" class="header">
+        <h1 id="header" className="header">
           Todo: {idx + 1}
         </h1>
-        <p className="new-task box">{todo.name}</p>
-        <p className="new-task box">{todo.email}</p>
-        <p className="new-task box">{todo.description}</p>
+        <p className="new-task box">{name}</p>
+        <p className="new-task box">{email}</p>
+        <p className="new-task box">{description}</p>
         <div>
           <button className="button2" onClick={edit}>
             Edit

@@ -4,11 +4,11 @@ import TodoHome from "../components/TodoHome";
 const Todolist = createContext();
 
 const TodoContext = () => {
-  const [todos, setTodos] = useState([]);
+  const [allTodos, setAllTodos] = useState([]);
 
   return (
     <>
-      <Todolist.Provider value={[todos, setTodos]}>
+      <Todolist.Provider value={[allTodos, setAllTodos]}>
         <TodoHome />
       </Todolist.Provider>
     </>

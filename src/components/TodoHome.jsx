@@ -3,26 +3,25 @@ import TodoBoard from "./TodoBoard";
 import { Todolist } from "../context/TodoContext";
 
 function TodoHome() {
-  const [todos, setTodos] = useContext(Todolist);
+  const [allTodos, setAllTodos] = useContext(Todolist);
 
   const [editMOde, setEditMode] = useState(false);
-  const demo = () => {
-    return {
-      name: "",
-      email: "",
-      description: "",
-    };
+  const initialForm = {
+    name: "",
+    email: "",
+    description: "",
   };
-  const [todo, settodo] = useState(demo);
+
+  const [formTodo, setFormTodo] = useState(initialForm);
 
   function handleChange(e) {
-    settodo({ ...todo, [e.target.name]: e.target.value });
+    setFormTodo({ ...formTodo, [e.target.name]: e.target.value });
   }
 
   const onclck = (e) => {
     e.preventDefault();
-    setTodos([...todos, todo]);
-    settodo(demo);
+    setAllTodos([...allTodos, formTodo]);
+    setFormTodo(initialForm);
     setEditMode(false);
   };
 
@@ -40,7 +39,7 @@ function TodoHome() {
               type="text"
               id="new-task"
               name="name"
-              value={todo.name}
+              value={formTodo.name}
               onChange={handleChange}
             />
           </div>
@@ -52,7 +51,7 @@ function TodoHome() {
               type="email"
               id="new-task"
               name="email"
-              value={todo.email}
+              value={formTodo.email}
               onChange={handleChange}
             />
           </div>
@@ -65,7 +64,7 @@ function TodoHome() {
               name="description"
               rows="3"
               cols="40"
-              value={todo.description}
+              value={formTodo.description}
               onChange={handleChange}
             ></textarea>
           </div>
@@ -79,12 +78,12 @@ function TodoHome() {
       </div>
 
       <div className="property">
-        {todos.map((todo, idx) => (
+        {allTodos.map((formTodo, idx) => (
           <TodoBoard
             key={idx}
             idx={idx}
-            todo={todo}
-            setTodo={settodo}
+            formTodo={formTodo}
+            setFormTodo={setFormTodo}
             setEditMode={setEditMode}
           />
         ))}
